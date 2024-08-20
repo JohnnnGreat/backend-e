@@ -38,7 +38,8 @@ app.get("/", (req, res) => {
 
 // Start server
 const PORT = process.env.PORT || 5000;
-const DATABASE = process.env.NODE_ENV === "development" ? process.env.MONGO_DATABASE_URL : DB_URL;
+const DATABASE =
+  process.env.NODE_ENV === "development" ? process.env.MONGO_DATABASE_URL : process.env.DB_URL;
 
 console.log(process.env.NODE_ENV);
 app.listen(PORT, () => {
