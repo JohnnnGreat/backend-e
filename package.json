@@ -23,8 +23,6 @@
     "node-appwrite": "^11.1.1",
     "nodemon": "^3.1.4",
     "socket.io": "^4.7.5"
-  },
-  "engines": {
-    "node": ">=14.20.1"
   }
+
 }
