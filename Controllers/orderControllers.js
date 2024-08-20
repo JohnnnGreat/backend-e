@@ -12,7 +12,7 @@ const addOrderItems = async (req, res) => {
     itemsPrice,
     taxPrice,
     shippingPrice,
-    totalPrice,
+    totalPrice
   } = req.body;
   console.log(req.body);
   if (orderItems && orderItems.length === 0) {
@@ -21,7 +21,7 @@ const addOrderItems = async (req, res) => {
   } else {
     const order = new Order({
       user: req.userDetails.user,
-      ...req.body,
+      ...req.body
     });
 
     console.log(order);
@@ -50,13 +50,15 @@ const getOrderById = async (req, res) => {
 // @route   GET /api/orders/myorders
 // @access  Private
 const getMyOrders = async (req, res) => {
-  console.log("reached new");
+  console.log(req.userDetails.user);
+
   const orders = await Order.find({ user: req.userDetails.user }).populate("orderItems.product");
+
   res.json(orders);
 };
 
 module.exports = {
   addOrderItems,
   getOrderById,
-  getMyOrders,
+  getMyOrders
 };

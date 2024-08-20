@@ -8,7 +8,7 @@ const protect = async (req, res, next) => {
 
       // Decode the token to get the user ID
       const decoded = jwt.verify(token, "hjwhefy892hjojkjlqw");
-      console.log(decoded);
+
       // Fetch the user from the database and attach it to the request
       req.userDetails = { user: decoded?.userId, role: decoded?.role };
 
