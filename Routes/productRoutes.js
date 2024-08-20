@@ -6,13 +6,13 @@ const {
   updateProduct,
   deleteProduct,
   uploadImages,
-  getProductByProductId,
+  getProductByProductId
 } = require("../Controllers/productControllers");
 const { protect, admin } = require("../Middlewares/AuthenticationMiddlewares"); // Assume admin middleware is for admin-only routes
 const multer = require("multer");
 
 const router = express.Router();
-const upload = multer({ dest: "/uploads" });
+const upload = multer({ storage: multer.memoryStorage() });
 // GET all products
 router.get("/", getProducts);
 
