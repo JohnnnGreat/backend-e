@@ -1,4 +1,3 @@
-
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -39,7 +38,9 @@ app.get("/", (req, res) => {
 
 // Start server
 const PORT = process.env.PORT || 5000;
-const DATABASE = process.env.MONGO_DATABASE_URL;
+const DATABASE = process.env.NODE_ENV === "development" ? process.env.MONGO_DATABASE_URL : DB_URL;
+
+console.log(process.env.NODE_ENV);
 app.listen(PORT, () => {
   // Database connection
   mongoose
