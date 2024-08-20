@@ -36,7 +36,6 @@ const addOrderItems = async (req, res) => {
 // @route   GET /api/orders/:id
 // @access  Private
 const getOrderById = async (req, res) => {
-  console.log("reached");
   const order = await Order.findById(req.params.id).populate("user", "name email");
 
   if (order) {
@@ -50,15 +49,35 @@ const getOrderById = async (req, res) => {
 // @route   GET /api/orders/myorders
 // @access  Private
 const getMyOrders = async (req, res) => {
-  console.log(req.userDetails.user);
-
   const orders = await Order.find({ user: req.userDetails.user }).populate("orderItems.product");
 
   res.json(orders);
 };
 
+const getOrderBySearch = async (req, res) => {
+  const { orderId } = req.params;
+  console.log(req.userDetails.user);
+  try {
+    // Get All Orders
+    const orders = await Order.findById(orderId);
+    if (!orders) {
+      const orders = await Order.find({ user: req.userDetails.user }).populate(
+        "orderItems.product"
+      );
+      return res
+        .status(200)
+        .json({ orders, message: "No order with this ID was found", idFound: false });
+    }
+
+    return res.status(200).json({ orders, idFound: true, message: "Order found" });
+  } catch (error) {
+    res.status(500).json({ message: "Oops!!, It seems this ID is invalid" });
+  }
+};
+
 module.exports = {
   addOrderItems,
   getOrderById,
-  getMyOrders
+  getMyOrders,
+  getOrderBySearch
 };

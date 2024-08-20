@@ -124,7 +124,7 @@ exports.getUserProfile = async (req, res) => {
 exports.updateProfile = async (req, res) => {
   const { id } = req.params;
   const { name, email, role, street, city, country } = req.body;
-  console.log(id, req.body);
+
   try {
     // Find the user by ID and update their information
     const updatedUser = await User.findByIdAndUpdate(
@@ -146,10 +146,10 @@ exports.updateProfile = async (req, res) => {
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
-    console.log(updatedUser);
+   
     res.status(200).json({ message: "Profile updated successfully", user: updatedUser });
   } catch (error) {
-    console.log(error);
+ 
     res.status(500).json({ message: error.message });
   }
 };

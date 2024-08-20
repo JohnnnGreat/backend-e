@@ -45,7 +45,7 @@ exports.addItemToCart = async (req, res) => {
 
     res.status(200).json(cart);
   } catch (error) {
-    console.log(error);
+  
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -59,7 +59,7 @@ exports.removeItemFromCart = async (req, res) => {
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }
-    console.log(productId);
+
     cart.items = cart.items.filter((item) => item.product._id.toString() !== productId);
 
     cart.updatedAt = Date.now();

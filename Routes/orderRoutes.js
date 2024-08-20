@@ -1,6 +1,11 @@
 const express = require("express");
 
-const { addOrderItems, getOrderById, getMyOrders } = require("../Controllers/orderControllers");
+const {
+  addOrderItems,
+  getOrderById,
+  getMyOrders,
+  getOrderBySearch
+} = require("../Controllers/orderControllers");
 const { protect } = require("../Middlewares/AuthenticationMiddlewares");
 
 const router = express.Router();
@@ -13,5 +18,7 @@ router.get("/myorders", protect, getMyOrders);
 
 // Route to get an order by ID
 router.get("/:id", protect, getOrderById);
+
+router.get("/getorderbysearch/:orderId", protect, getOrderBySearch);
 
 module.exports = router;
