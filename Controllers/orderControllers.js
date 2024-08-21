@@ -51,7 +51,7 @@ const getOrderById = async (req, res) => {
 const getMyOrders = async (req, res) => {
   console.log(req.userDetails.user);
   const orders = await Order.find({ user: req.userDetails.user }).populate("orderItems.product");
-
+  console.log(orders);
   res.json(orders);
 };
 
