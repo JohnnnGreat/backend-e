@@ -1,18 +1,18 @@
 const express = require("express");
 const {
-  getProducts,
-  getProductsById,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-  uploadImages,
-  getProductByProductId
+    getProducts,
+    getProductsById,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    uploadImages,
+    getProductByProductId, getProductByText
 } = require("../Controllers/productControllers");
-const { protect, admin } = require("../Middlewares/AuthenticationMiddlewares"); // Assume admin middleware is for admin-only routes
+const {protect, admin} = require("../Middlewares/AuthenticationMiddlewares"); // Assume admin middleware is for admin-only routes
 const multer = require("multer");
 
 const router = express.Router();
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer({storage: multer.memoryStorage()});
 // GET all products
 router.get("/", getProducts);
 
@@ -32,5 +32,6 @@ router.post("/", protect, createProduct);
 router.get("/:productId", getProductByProductId);
 
 router.post("/uploadImages", upload.array("images", 4), protect, uploadImages);
+router.get('/getproductbytext/:text', getProductByText)
 
 module.exports = router;
