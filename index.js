@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const multer = require("multer");
 const dotenv = require("dotenv").config();
-
 const app = express();
 
 // Import routes
@@ -41,7 +40,6 @@ const PORT = process.env.PORT || 5000;
 const DATABASE =
   process.env.NODE_ENV === "development" ? process.env.MONGO_DATABASE_URL : process.env.DB_URL;
 
-console.log(process.env.NODE_ENV);
 app.listen(PORT, () => {
   // Database connection
   mongoose
